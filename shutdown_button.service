@@ -1,0 +1,10 @@
+[Unit]
+Description=Shutdown the raspberry pi with the stop button using GPIO
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python3 /home/pi/raspberry-scripts/tempServer.py
+
+[Install]
+WantedBy=multi-user.target
