@@ -4,11 +4,17 @@
 
 
 import serial
+import logging
 import time
 import requests
 from subprocess import check_output
 from datetime import datetime
 from influxdb import InfluxDBClient
+
+# création du logguer
+logging.basicConfig(filename='/var/log/data_influxdb.log', level=logging.INFO, format='%(asctime)s %(message)s')
+logger = logging.getLogger()
+
 
 # connexion a la base de données InfluxDB
 client = InfluxDBClient('192.168.1.17', 8086)
@@ -43,6 +49,8 @@ def add_measures(datasize):
                     "value": datasize
                 }
             }
+    
+    logging.info("Data -> %s", point)
     # print ("Database point ", point)
     points.append(point)
 
