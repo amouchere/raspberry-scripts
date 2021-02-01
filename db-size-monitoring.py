@@ -12,7 +12,7 @@ from datetime import datetime
 from influxdb import InfluxDBClient
 
 # création du logguer
-logging.basicConfig(filename='/home/pi/data/db-size-monitoring/db-size-monitoring.log', level=logging.INFO, format='%(asctime)s %(message)s')
+logging.basicConfig(filename='/home/pi/data/log/db-size-monitoring.log', level=logging.INFO, format='%(asctime)s %(message)s')
 logger = logging.getLogger()
 
 
@@ -22,15 +22,15 @@ db = "homedata"
 connected = False
 while not connected:
     try:
-        # print ("Database %s exists?", db)
+        logging.info("Database %s exists?", db)
         if not {'name': db} in client.get_list_database():
-            # print ("Database %s creation..", db)
+            logging.info("Database %s creation..", db)
             client.create_database(db)
-            # print ("Database %s created!", db)
+            logging.info("Database %s created!", db)
         client.switch_database(db)
-        # print ("Connected to ", db)
+        logging.info("Connected to %s", db)
     except requests.exceptions.ConnectionError:
-        # print ('InfluxDB is not reachable. Waiting 5 seconds to retry.')
+        logging.info('InfluxDB is not reachable. Waiting 5 seconds to retry.')
         time.sleep(5)
     else:
         connected = True
@@ -50,8 +50,7 @@ def add_measures(datasize):
                 }
             }
     
-    logging.info("Data -> %s", point)
-    # print ("Database point ", point)
+    logging.info("Database point ", point)
     points.append(point)
 
     client.write_points(points)
@@ -64,4 +63,4 @@ add_measures(int(datasize.strip()))
 
 # result = client.query('select value from datasize;')
 
-# print("Result: {0}".format(result))
+# logging.info("Result: {0}".format(result))
