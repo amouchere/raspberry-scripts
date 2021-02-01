@@ -22,7 +22,11 @@ sudo systemctl start shutdown-button.service
 # Dépendances pour le shell de monitoring de la taille de la BDD
 pip3 install pySerial influxdb
 # installation de la cron task pour le monitoring de la taille de la BDD
-sudo chmod +x /home/pi/raspberry-scripts/data_influxdb_cron
-sudo cp /home/pi/raspberry-scripts/data_influxdb_cron /etc/cron.daily
+crontab -l > mycron
+# echo new cron into cron file
+echo "* * * * * python3 /home/pi/raspberry-scripts/db-size-monitoring.py" >> mycron
+# install new cron file
+crontab mycron
+rm mycron
 
 ```
