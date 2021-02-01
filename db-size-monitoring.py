@@ -12,7 +12,7 @@ from datetime import datetime
 from influxdb import InfluxDBClient
 
 # création du logguer
-logging.basicConfig(filename='/var/log/data_influxdb.log', level=logging.INFO, format='%(asctime)s %(message)s')
+logging.basicConfig(filename='/home/pi/data/db-size-monitoring/db-size-monitoring.log', level=logging.INFO, format='%(asctime)s %(message)s')
 logger = logging.getLogger()
 
 
