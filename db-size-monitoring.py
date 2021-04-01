@@ -17,7 +17,7 @@ logger = logging.getLogger()
 
 
 # connexion a la base de données InfluxDB
-client = InfluxDBClient('192.168.1.17', 8086)
+client = InfluxDBClient('localhost', 8086)
 db = "homedata"
 connected = False
 while not connected:
