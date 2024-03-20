@@ -1,7 +1,7 @@
 # raspberry-scripts
 
 ## Init shell
-```
+```shell
 groups pi
 
 sudo apt-get update && sudo apt-get -y upgrade
@@ -15,6 +15,18 @@ git config --global user.name "AMouchere"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ```
+
+## SSH Key
+```shell
+cd ~
+ssh-keygen -o -t rsa -b 4096
+
+# Une fois créée...
+cat ~/.ssh/id_rsa.pub
+
+```
+Copier la clé générée dans le profil github : https://github.com/settings/ssh/new
+
 
 ## Installation du service pour le bouton shutdown. 
 
